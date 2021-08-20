@@ -1,17 +1,49 @@
-articleCount = 0
+window.onload = function() {
+    var data = window.localStorage.getItem("data")
+    JSON.parse(data).articles.forEach(article => {
+        createArticle(article)
+    })
 
-function createArticle() {
-    articleCount++
+}
+
+function saveData() {
+    var as = document.getElementById("articleSection")
+
+    var data = '{ "articles" : ['
+    as.childNodes.forEach(node => {
+        if (node.id != "articleTemplate" && node.id != "addArticle" && node.nodeName == "DIV") {
+            toAdd = node.querySelector('p[name="plainParagraph"]').innerHTML.trim()
+            data += '{'
+            data += '"baseParagraph": "' + toAdd + '"'
+            data += '},'
+        }
+    })
+    data = data.substr(0, data.length - 1)
+    data += ']}';
+    console.log(JSON.parse(data).articles)
+    window.localStorage.setItem("data", data)
+}
+
+document.getElementById('addArticle').addEventListener("click", () => {
+    createArticle()
+})
+
+function createArticle(aData) {
     var original = document.getElementById("articleTemplate");
     var clone = original.cloneNode(true);
-    clone.id = "article" + articleCount
+    clone.id = ""
 
     var count = 0;
-    var p1 = clone.querySelector('p[name="plainPeragraph"]');
+    var p1 = clone.querySelector('p[name="plainParagraph"]');
     var p2 = clone.querySelector('p[name="buttonParagraph"]');
     var noteHolder = clone.querySelector('div[name="noteHolder"]');
 
-    articles[1].split(/(?<=[.?!])/).forEach(sentance => {
+    if (aData) {
+        p1.innerHTML += aData.baseParagraph
+    } else {
+        p1.innerHTML += articles[1]
+    }
+    p1.innerHTML.split(/(?<=[.?!])/).forEach(sentance => {
         count++
         var deliminators = [",", ".", "?", "!", ";", "-"]
         sentance.split(" ").forEach(word => {
@@ -31,7 +63,6 @@ function createArticle() {
                     noteHolder.querySelector("input[name=" + button.name + "]").value += word + " "
 
                 });
-                // p2.insertBefore(button, p2.firstChild)
                 p2.appendChild(button)
             }
         })
@@ -40,8 +71,8 @@ function createArticle() {
             noteHolder.innerHTML += "<input type='text' name='sentance" + count + "'></input>"
         }
     })
-
     document.getElementById("articleSection").prepend(clone);
+    saveData()
 }
 
 articles = [
