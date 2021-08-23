@@ -7,26 +7,29 @@ window.onload = function() {
 }
 
 function saveData() {
-    var as = document.getElementById("articleSection")
+    var cn = [...document.getElementById("articleSection").childNodes];
 
-    var data = '{ "articles" : ['
-    as.childNodes.forEach(node => {
-        if (node.id != "articleTemplate" && node.id != "addArticle" && node.nodeName == "DIV") {
-            toAdd = node.querySelector('p[name="plainParagraph"]').innerHTML.trim()
-            data += '{'
-            data += '"baseParagraph": "' + toAdd + '"'
-            data += '},'
+    var innerContent = cn.filter(node => {
+        return node.id != "articleTemplate" && node.nodeName == "ARTICLE";
+    }).map(node => {
+        return {
+            baseParagraph: node.querySelector('p[name="plainParagraph"]').innerHTML.trim()
         }
-    })
-    data = data.substr(0, data.length - 1)
-    data += ']}';
-    console.log(JSON.parse(data).articles)
-    window.localStorage.setItem("data", data)
+    });
+
+    var data = JSON.stringify({ articles: innerContent });
+
+    localStorage.setItem("data", data);
 }
 
 document.getElementById('addArticle').addEventListener("click", () => {
     createArticle()
 })
+
+
+
+// try adding filter and map. Change from buttons to spans. Maybe get rid of foreach
+// use less ids and more classes
 
 function createArticle(aData) {
     var original = document.getElementById("articleTemplate");
