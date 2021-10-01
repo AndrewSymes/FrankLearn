@@ -1,74 +1,93 @@
-nav {
-    height: 50px;
-    background-color: lightcoral;
+.invisable {
+    display: none;
 }
-#mainLogo {
-    margin: auto;
-    font-size: 40px;
+
+a.brand {
+    font-size: 200%;
+    padding: none;
 }
-#tutorial, #activity {
-    background-color: crimson;
-    border: none;
-    margin-right: 10px;
-    padding: 10px;
-    float: right;
-    width: 100px;
-    height: 100%;
-}
-#tutorial:hover, #activity:hover {
-    background-color: red;
-}
-#articleSection {
+
+#article-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
+
 #addArticle {
     background-color: white;
+    border-width: thin;
     width: 100px;
     height: 100px;
     font-size: 100%;
     margin: 10px;
 }
+
 #articleTemplate {
     display: none;
 }
-article {
-    margin: 10px;
-    padding: 10px;
-    background-color: orange;
-    width: 425px;
-    height: 550px;
-    border-radius: 5px;
-}
-.invisable {
-    display: none;
-}
-article input {
-    background-color: lightgoldenrodyellow;
+
+.card1 input {
     border-width: thin;
+    margin-bottom: 3px;
     width: 100%;
 }
-article:focus-within {
-    width: 510px;
-    height: 660px;
+
+.card1 textarea {
+    width: 100%;
+    height: 100px;
+}
+
+.card1 {
+    font-size: 150%;
+    height: 39vw;
+    width: 30vw;
+    padding: 20px;
+    margin: 1vw;
+    overflow: auto;
+    background-color: whitesmoke;
+    border-radius: 7px;
+    transition: width .25s, height .25s;
+}
+
+.card1:hover:not(:focus-within) {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.card1:focus-within {
+    height: 99%;
+    width: 77.3vh;
     position: fixed;
+    border: thin gray solid;
+    border-radius: 0;
+    margin: 0;
+    z-index: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-article>textarea {
-    background-color: lightgoldenrodyellow;
-    width: 98%;
-    height: 230px;
+
+.card1:focus-within textarea {
+    height: 300px;
 }
-article button {
+
+.card1:focus-within .saveButton {
+    display: initial;
+}
+
+.saveButton {
+    display: none
+}
+
+.card-body1 p button {
     font-size: medium;
     margin-left: 5px;
-    padding: 0%;
+    padding: 0;
     border: none;
     background: none;
 }
-article:focus-within button:hover {
+
+.card1:focus-within button:hover {
     background-color: red;
 }

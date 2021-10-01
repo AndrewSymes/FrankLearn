@@ -1,25 +1,37 @@
 window.onload = function() {
     var data = window.localStorage.getItem("data")
-    JSON.parse(data).articles.forEach(article => {
+    JSON.parse(data).articles.reverse().forEach(article => {
         createArticle(article)
+    });
+    [...document.getElementsByClassName('saveButton')].forEach(b => {
+        b.addEventListener("click", saveData)
     })
 
 }
 
 function saveData() {
-    var cn = [...document.getElementById("articleSection").childNodes];
+    var cn = [...document.getElementById("article-container").childNodes];
 
     var innerContent = cn.filter(node => {
-        return node.id != "articleTemplate" && node.nodeName == "ARTICLE";
+        return node.id != "articleTemplate" && node.nodeName == "DIV";
     }).map(node => {
+
         return {
-            baseParagraph: node.querySelector('p[name="plainParagraph"]').innerHTML.trim()
+            baseParagraph: node.querySelector('p[name="plainParagraph"]').innerHTML.trim(),
+            dateCreated: node.querySelector('time').innerHTML.trim(),
+
+            sentanceSummaries: [...node.querySelector('div[class="noteHolder"]').querySelectorAll('input')].map(sn => {
+                return sn.value;
+            }),
+
+            textAreaContent: node.querySelector('textarea').value
         }
     });
 
     var data = JSON.stringify({ articles: innerContent });
 
     localStorage.setItem("data", data);
+    console.log(innerContent)
 }
 
 document.getElementById('addArticle').addEventListener("click", () => {
@@ -39,15 +51,22 @@ function createArticle(aData) {
     var count = 0;
     var p1 = clone.querySelector('p[name="plainParagraph"]');
     var p2 = clone.querySelector('p[name="buttonParagraph"]');
+    var date = clone.querySelector('time');
     var noteHolder = clone.querySelector('div[name="noteHolder"]');
+    var textArea = clone.querySelector('textarea');
 
     if (aData) {
-        p1.innerHTML += aData.baseParagraph
+        p1.innerHTML += aData.baseParagraph;
+        date.innerHTML = aData.dateCreated;
+        textArea.value = aData.textAreaContent;
+
     } else {
-        p1.innerHTML += articles[1]
+        const d = new Date();
+        date.innerHTML = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear();
+        p1.innerHTML += articles[Math.floor(Math.random() * 2)]
+
     }
     p1.innerHTML.split(/(?<=[.?!])/).forEach(sentance => {
-        count++
         var deliminators = [",", ".", "?", "!", ";", "-"]
         sentance.split(" ").forEach(word => {
             if (word != " " && word != "" && word != "\n") {
@@ -63,18 +82,26 @@ function createArticle(aData) {
                 button.innerHTML = word + addOn
                 button.name = "sentance" + count
                 button.addEventListener("click", () => {
-                    noteHolder.querySelector("input[name=" + button.name + "]").value += word + " "
-
+                    noteHolder.querySelector("input[name=" + button.name + "]").value += word + " ";
+                    saveData();
                 });
                 p2.appendChild(button)
             }
         })
 
         if (/\S/.test(sentance)) {
-            noteHolder.innerHTML += "<input type='text' name='sentance" + count + "'></input>"
+            // noteHolder.innerHTML += "<input type='text' name='sentance" + count + "'></input>"
+            var newInput = document.createElement("input")
+            newInput.type = "text"
+            newInput.name = "sentance" + count
+            if (aData) {
+                newInput.value = aData.sentanceSummaries[count]
+            }
+            noteHolder.appendChild(newInput)
         }
+        count++
     })
-    document.getElementById("articleSection").prepend(clone);
+    document.getElementById("article-container").prepend(clone);
     saveData()
 }
 
