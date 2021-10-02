@@ -31,17 +31,11 @@ function saveData() {
     var data = JSON.stringify({ articles: innerContent });
 
     localStorage.setItem("data", data);
-    console.log(innerContent)
 }
 
 document.getElementById('addArticle').addEventListener("click", () => {
     createArticle()
 })
-
-
-
-// try adding filter and map. Change from buttons to spans. Maybe get rid of foreach
-// use less ids and more classes
 
 function createArticle(aData) {
     var original = document.getElementById("articleTemplate");
@@ -90,7 +84,6 @@ function createArticle(aData) {
         })
 
         if (/\S/.test(sentance)) {
-            // noteHolder.innerHTML += "<input type='text' name='sentance" + count + "'></input>"
             var newInput = document.createElement("input")
             newInput.type = "text"
             newInput.name = "sentance" + count
