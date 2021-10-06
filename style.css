@@ -2,9 +2,25 @@
     display: none;
 }
 
+.align-center {
+    text-align: center;
+}
+
 a.brand {
     font-size: 200%;
     padding: none;
+}
+
+.red-background {
+    background-color: red !important;
+}
+
+#create-essay:focus-within select {
+    display: initial;
+}
+
+#create-essay:focus-within button {
+    display: none;
 }
 
 #article-container {
@@ -17,37 +33,71 @@ a.brand {
 #addArticle {
     background-color: white;
     border-width: thin;
-    width: 100px;
-    height: 100px;
+    border-radius: 7px;
     font-size: 100%;
-    margin: 10px;
+}
+
+#addArticle:hover {
+    background-color: lightblue;
+    cursor: pointer;
 }
 
 #articleTemplate {
     display: none;
 }
 
-.card1 input {
+.card1 .essay-title {
+    text-align: center;
+    width: 100%;
+}
+
+.card1 .author-name,
+.card1 .essay-title {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.card1 .noteHolder input {
+    font-size: large;
     border-width: thin;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
+    outline: none;
     width: 100%;
 }
 
 .card1 textarea {
     width: 100%;
+    outline: none;
+    font-size: large;
+    text-indent: 10%;
     height: 100px;
 }
 
 .card1 {
     font-size: 150%;
-    height: 39vw;
-    width: 30vw;
+    height: 26vw;
+    width: 20vw;
     padding: 20px;
     margin: 1vw;
-    overflow: auto;
+    overflow: hidden;
     background-color: whitesmoke;
     border-radius: 7px;
-    transition: width .25s, height .25s;
+    transition: width .25s, height .25s, background-color 1s;
+}
+
+.buttonParagraph {
+    text-indent: 10%;
+}
+
+.card1 time,
+.card1 h1,
+.card1 .author-name,
+.card1 .essay-title {
+    font-size: 70%;
+    margin: 0;
+    margin-left: 5px;
+    word-wrap: break-word;
 }
 
 .card1:hover:not(:focus-within) {
@@ -55,10 +105,23 @@ a.brand {
     cursor: pointer;
 }
 
+.card1:not(:focus-within) textarea {
+    background: none;
+    border: none;
+    height: 18vw;
+    resize: none;
+    cursor: pointer;
+}
+
+.card1:not(:focus-within) .hide-not-focused {
+    display: none;
+}
+
 .card1:focus-within {
     height: 99%;
     width: 77.3vh;
     position: fixed;
+    overflow: auto;
     border: thin gray solid;
     border-radius: 0;
     margin: 0;
@@ -68,17 +131,22 @@ a.brand {
     transform: translate(-50%, -50%);
 }
 
+.card1:focus-within textarea::placeholder {
+    color: rgba(0, 0, 0, 0);
+}
+
 .card1:focus-within textarea {
     height: 300px;
 }
 
-.card1:focus-within .saveButton {
+
+/* .card1:focus-within .saveButton {
     display: initial;
 }
 
 .saveButton {
     display: none
-}
+} */
 
 .card-body1 p button {
     font-size: medium;

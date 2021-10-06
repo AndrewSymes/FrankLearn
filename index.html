@@ -17,33 +17,46 @@
         <nav class="navbar navbar-expand navbar-light bg-light">
             <div class="nav navbar-nav">
                 <a class="nav-item nav-link active brand" href="#">Frank Learn</a>
+                <div id="create-essay" class="form-group" style="margin: 20px;">
+                    <button class="form-control">Create New Essay</button>
+                    <select id="topic-list" class="form-control invisable">
+                        <option selected>Topic</option>
+                    </select>
+                </div>
             </div>
         </nav>
 
         <div id="article-container" class="card-columns1">
             <div id="articleTemplate" tabindex="1" class="card1">
                 <div class="card-body1">
-                    <time>Feb 25, 2002</time>
                     <p name="plainParagraph" class="invisable">
                     </p>
-                    <p name="buttonParagraph" class="card-text">
+                    <p name="buttonParagraph" class="buttonParagraph hide-not-focused">
                     </p>
-                    <h3>Three word sentance summaries</h3>
-                    <div name="noteHolder" class='noteHolder'>
+                    <h3 class="hide-not-focused">Three word sentance summaries</h3>
+                    <div name="noteHolder" class='noteHolder hide-not-focused'>
                     </div>
-                    <h3>Reiteration</h3>
-                    <textarea></textarea>
-                    <button class="saveButton">Save</button>
+                    <h3 class="hide-not-focused">Reiteration</h3>
+                    <input class="author-name" placeholder="Author Name"></input>
+                    <br>
+                    <time>Feb 25, 2002</time>
+                    <br>
+                    <div class="align-center">
+                        <input class="essay-title" placeholder="Essay Title"></input>
+                    </div>
+                    <textarea placeholder="_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"></textarea>
+                    <button class="saveButton hide-not-focused" onclick="saveData()">Save</button>
+                    <button class="deleteButton hide-not-focused" onclick="deleteCard(this)">Delete</button>
                 </div>
             </div>
-            <button id="addArticle">New Article</button>
         </div>
+
     </main>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script src="script.js "></script>
 </body>
 
 </html>
